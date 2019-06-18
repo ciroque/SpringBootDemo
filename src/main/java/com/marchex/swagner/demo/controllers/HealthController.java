@@ -30,12 +30,12 @@ public class HealthController {
         return response;
     }
 
-    @RequestMapping("/ping")
+    @RequestMapping("/health/ping")
     public String ping() {
         return "pong";
     }
 
-    @RequestMapping("/libraries")
+    @RequestMapping("/health/libraries")
     public Libraries libraries() {
         return Libraries.GetLibraries();
     }
