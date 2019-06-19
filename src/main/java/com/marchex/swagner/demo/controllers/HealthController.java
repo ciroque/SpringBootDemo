@@ -20,8 +20,8 @@ public class HealthController {
         ConsulConnectResponse response;
 
         try {
-//        Consul client = Consul.builder().withUrl("http://localhost:8500").build();
-            Consul client = Consul.builder().withUrl("http://consul.us-east-1.marchex.net:8500/").build();
+        Consul client = Consul.builder().withUrl("http://localhost:8500").build();
+//            Consul client = Consul.builder().withUrl("http://consul.us-east-1.marchex.net:8500/").build();
             response = new ConsulConnectResponse("available");
         } catch(Exception ex) {
             response = new ConsulConnectResponse(String.format("not-available: %s", ex.getMessage()));
