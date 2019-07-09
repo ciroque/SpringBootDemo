@@ -1,14 +1,19 @@
 package com.marchex.swagner.demo.controllers;
 
+import com.marchex.swagner.demo.consul.ConsulProperties;
 import com.marchex.swagner.demo.pojo.ConsulConnectResponse;
 import com.marchex.swagner.demo.pojo.HealthResponse;
 import com.marchex.swagner.demo.pojo.Libraries;
 import com.orbitz.consul.Consul;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthController {
+
+    @Autowired
+    private ConsulProperties consulProperties;
 
     @RequestMapping("/health")
     public HealthResponse health() {
@@ -18,11 +23,9 @@ public class HealthController {
     @RequestMapping("/health/consul-connection")
     public ConsulConnectResponse testConsulConnection() {
         ConsulConnectResponse response;
-
         try {
-        Consul client = Consul.builder().withUrl("http://localhost:8500").build();
-//            Consul client = Consul.builder().withUrl("http://consul.us-east-1.marchex.net:8500/").build();
-            response = new ConsulConnectResponse("available");
+            Consul client = consulProperties.getClient();
+            response = new ConsulConnectResponse(String.format("available: %s", client.statusClient().getLeader()));
         } catch(Exception ex) {
             response = new ConsulConnectResponse(String.format("not-available: %s", ex.getMessage()));
         }

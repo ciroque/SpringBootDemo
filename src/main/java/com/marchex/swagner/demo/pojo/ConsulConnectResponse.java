@@ -1,8 +1,5 @@
 package com.marchex.swagner.demo.pojo;
 
-import java.util.List;
-import java.util.Map;
-
 public class ConsulConnectResponse {
     private String status;
 
