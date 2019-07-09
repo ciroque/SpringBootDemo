@@ -8,8 +8,8 @@ public class
 
 SwagnerDemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SwagnerDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SwagnerDemoApplication.class, args);
+    }
 
 }
