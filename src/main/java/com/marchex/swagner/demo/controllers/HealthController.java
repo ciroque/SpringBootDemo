@@ -1,6 +1,6 @@
 package com.marchex.swagner.demo.controllers;
 
-import com.marchex.swagner.demo.consul.ConsulProperties;
+import com.marchex.swagner.demo.consul.ConsulClient;
 import com.marchex.swagner.demo.pojo.ConsulConnectResponse;
 import com.marchex.swagner.demo.pojo.HealthResponse;
 import com.marchex.swagner.demo.pojo.Libraries;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthController {
 
     @Autowired
-    private ConsulProperties consulProperties;
+    private ConsulClient consulClient;
 
     @RequestMapping("/health")
     public HealthResponse health() {
@@ -24,7 +24,7 @@ public class HealthController {
     public ConsulConnectResponse testConsulConnection() {
         ConsulConnectResponse response;
         try {
-            Consul client = consulProperties.getClient();
+            Consul client = consulClient.getClient();
             response = new ConsulConnectResponse(String.format("available: %s", client.statusClient().getLeader()));
         } catch(Exception ex) {
             response = new ConsulConnectResponse(String.format("not-available: %s", ex.getMessage()));
